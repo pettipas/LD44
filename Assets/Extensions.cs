@@ -427,6 +427,15 @@ public static class Extensions {
 	public static T Duplicate<T>(this T prefab, Transform transform) where T : Object {
 		return prefab.Duplicate(transform.position, transform.rotation);
 	}
+
+    public static int ToLayer(int bitmask) {
+        int result = bitmask > 0 ? 0 : 31;
+        while (bitmask > 1) {
+            bitmask = bitmask >> 1;
+            result++;
+        }
+        return result;
+    }
 }
 
 

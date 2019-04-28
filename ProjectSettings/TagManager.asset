@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - game
-  - 
-  - 
-  - 
-  - 
+  - enemy
+  - world
+  - player
+  - floor
   - 
   - 
   - 

@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
     public Vector3 LastGoodCardinalDirection;
     public Vector3 LastGoodDirection;
     public Vector3 LatestDirection;
-
+    public Transform targeter;
     public float Speed;
     public List<Transform> wheelsTransforms = new List<Transform>();
     public List<Spin> wheels = new List<Spin>();
@@ -18,9 +18,17 @@ public class Controller : MonoBehaviour
     public string animationString;
 
     public Dictionary<string, string> animationDictionary = new Dictionary<string, string>();
-
+    public SpinnyThing spinnyThing;
+    public Vector3 velocity;
+    public Attack Attack;
+    public Transform spinlp;
+    public static Controller INstance; 
 
     public void Awake() {
+        Time.timeScale = 0.5f;
+        if (INstance == null) {
+            INstance = this;
+        }
 
         animationDictionary.Add("(0.0, 0.0, -1.0)", "down");
         animationDictionary.Add("(0.0, 0.0, -0.5)", "down");
@@ -80,5 +88,21 @@ public class Controller : MonoBehaviour
 
         Velocity = LatestDirection * Speed * Time.smoothDeltaTime;
         transform.Translate(Velocity);
+
+        if (!Attack.enabled && Input.GetMouseButtonDown(0) && Vector3.Distance(spinnyThing.transform.position, spinlp.position) < 1.0f) {
+            Attack.SafeEnable();
+        }
+
+        if (!Attack.enabled) {
+            spinnyThing.transform.position = Vector3.SmoothDamp(spinnyThing.transform.position, spinlp.position, ref velocity, 0.1f);
+        }
+
+        if (Input.GetMouseButtonDown(1) && spinnyThing.captured != null &&  Vector3.Distance(spinnyThing.transform.position, spinlp.position) < 1.0f) {
+            Projectile projectile = spinnyThing.captured.transform.GetComponent<Projectile>();
+            projectile.Launch(10, (targeter.position - transform.position).normalized);
+            spinnyThing.captured.transform.SetParent(null);
+            spinnyThing.captured = null;
+            projectile.enabled = true;
+        }
     }
 }
