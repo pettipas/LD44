@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour {
     public Damager damager;
     public AttackPlayer attack;
     public Transform damagePoint;
+ 
 
     public void Update() {
         if (agent.enabled) {

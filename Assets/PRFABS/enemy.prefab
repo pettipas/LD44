@@ -1131,6 +1131,8 @@ MonoBehaviour:
   duration: 0.5
   bodyAnimator: {fileID: 1134066198640520962}
   tvguy: {fileID: 1134066198736492805}
+  explode: {fileID: 2452066426338775932, guid: 582ba8613df826a4ab554287b22170a5, type: 3}
+  enemy: {fileID: 1134066198736493309}
 --- !u!143 &1134066198736492804
 CharacterController:
   m_ObjectHideFlags: 0

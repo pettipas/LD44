@@ -14,6 +14,8 @@ public class TakingDamage : MonoState
     public float duration;
     public Animator bodyAnimator;
     public TvGuy tvguy;
+    public Explosion explode;
+    public Enemy enemy;
 
     public void OnEnable() {
         gameObject.layer = Extensions.ToLayer(flyingState);
@@ -29,7 +31,6 @@ public class TakingDamage : MonoState
     {
         timehit += Time.smoothDeltaTime;
         ctrller.Move(direction * 3.0f * Time.smoothDeltaTime);
-
         if (timehit > duration ) {
             transform.position = new Vector3(transform.position.x,0, transform.position.z);
             this.enabled = false;
@@ -37,6 +38,10 @@ public class TakingDamage : MonoState
             agent.enabled = true;
             agent.isStopped = false;
             tvguy.enabled = true;
+            if (enemy.life <= 0) {
+                Destroy(this.gameObject);
+                explode.Duplicate(transform.position);
+            }
         }
     }
 }
