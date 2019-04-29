@@ -14,13 +14,17 @@ public class Enemy : MonoBehaviour {
     public int life;
     public TakingDamage damnagedState;
     public Damager damager;
-    
+    public AttackPlayer attack;
+    public Transform damagePoint;
 
     public void Update() {
         if (agent.enabled) {
             agent.updateRotation = false;
             agent.SetDestination(Controller.INstance.transform.position);
         }
+
+        Vector3 dampDir = (Controller.INstance.transform.position - transform.position).normalized;
+        damagePoint.transform.position = transform.position + dampDir * 1.1f;
     }
 
     public void ParentToSpinnyThing(SpinnyThing thing) {
@@ -32,6 +36,7 @@ public class Enemy : MonoBehaviour {
         thing.speed = spinnythingspeed;
         this.gameObject.layer = Extensions.ToLayer(capturedLayer.value);
         damager.enabled = true;
+        attack.enabled = false;
     }
 
     public void TakeDamage(int hits, Vector3 awayFromWeapon) {
@@ -44,5 +49,10 @@ public class Enemy : MonoBehaviour {
             damnagedState.direction = awayFromWeapon;
             damnagedState.GotoState();
         }
+    }
+
+    public void OnDrawGizmos() {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(damagePoint.position, 0.3f);
     }
 }

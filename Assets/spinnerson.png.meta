@@ -20,6 +20,12 @@ TextureImporter:
   - first:
       213: 1642929257595752359
     second: spinblade
+  - first:
+      213: 2974188802872700265
+    second: spinnerson_5
+  - first:
+      213: -4589091528205761488
+    second: reticle
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -234,6 +240,48 @@ TextureImporter:
       bones: []
       spriteID: 800431a1853246f428e4927aae9026d5
       internalID: 1642929257595752359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spinnerson_5
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 188
+        width: 149
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e07dba536bd7c474ebaee0d7fdfa3ebf
+      internalID: 2974188802872700265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reticle
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 77
+        width: 44
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 138d4594b8fdb174983cc9b48d659276
+      internalID: -4589091528205761488
       vertices: []
       indices: 
       edges: []

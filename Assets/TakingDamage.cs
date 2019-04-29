@@ -12,6 +12,8 @@ public class TakingDamage : MonoState
     public CharacterController ctrller;
     public float timehit;
     public float duration;
+    public Animator bodyAnimator;
+    public TvGuy tvguy;
 
     public void OnEnable() {
         gameObject.layer = Extensions.ToLayer(flyingState);
@@ -19,6 +21,8 @@ public class TakingDamage : MonoState
         agent.enabled = false;
         timehit = 0;
         direction = new Vector3(direction.x,0, direction.z);
+        bodyAnimator.SafePlay("badguy_hurt");
+        tvguy.enabled = false;
     }
 
     public void Update()
@@ -32,6 +36,7 @@ public class TakingDamage : MonoState
             gameObject.layer = Extensions.ToLayer(enemyState);
             agent.enabled = true;
             agent.isStopped = false;
+            tvguy.enabled = true;
         }
     }
 }

@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    public int life = 8;
+
     public Vector3 LastestCardinalDirection;
     public Vector3 LastGoodCardinalDirection;
     public Vector3 LastGoodDirection;
@@ -16,16 +19,19 @@ public class Controller : MonoBehaviour
     public float deadzone;
     public Animator body;
     public string animationString;
+    public ParticleSystem sparks;
 
+    public KnockBack knocback;
     public Dictionary<string, string> animationDictionary = new Dictionary<string, string>();
     public SpinnyThing spinnyThing;
     public Vector3 velocity;
     public Attack Attack;
     public Transform spinlp;
-    public static Controller INstance; 
+    public static Controller INstance;
+
+    public CharacterController mover;
 
     public void Awake() {
-        Time.timeScale = 0.5f;
         if (INstance == null) {
             INstance = this;
         }
@@ -72,7 +78,7 @@ public class Controller : MonoBehaviour
         }
 
         animationString = LastGoodCardinalDirection.ToString();
-        if (animationDictionary.ContainsKey(animationString)) {
+        if (animationDictionary.ContainsKey(animationString) && !knocback.enabled) {
             body.SafePlay(animationDictionary[animationString]);
         }
 
@@ -87,7 +93,10 @@ public class Controller : MonoBehaviour
         }
 
         Velocity = LatestDirection * Speed * Time.smoothDeltaTime;
-        transform.Translate(Velocity);
+
+        if (!knocback.enabled) {
+            mover.Move(Velocity);
+        }
 
         if (!Attack.enabled && Input.GetMouseButtonDown(0) && Vector3.Distance(spinnyThing.transform.position, spinlp.position) < 1.0f) {
             Attack.SafeEnable();
@@ -103,6 +112,14 @@ public class Controller : MonoBehaviour
             spinnyThing.captured.transform.SetParent(null);
             spinnyThing.captured = null;
             projectile.enabled = true;
+        }
+    }
+
+    public void TakeDamage(int damage, Vector3 dir) {
+        knocback.direction = dir;
+        if (!knocback.enabled) {
+            life += damage;
+            knocback.GotoState();
         }
     }
 }
