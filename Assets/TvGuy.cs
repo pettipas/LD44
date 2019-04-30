@@ -9,7 +9,7 @@ public class TvGuy : MonoBehaviour
     public NavMeshAgent agent;
     public Dictionary<string, string> animationDictionary = new Dictionary<string, string>();
     public Animator body;
-
+    public float HEIGHT;
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +40,7 @@ public class TvGuy : MonoBehaviour
 
     void Update()
     {
+
         if (agent.enabled) {
            Vector3 v = agent.velocity.normalized.NSEWXZ();
             v = new Vector3(v.x,0,v.z);

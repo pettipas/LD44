@@ -12,6 +12,11 @@ public class Enemy : MonoBehaviour {
     public LayerMask capturedLayer;
     public LayerMask flyinglayer;
     public int life;
+
+    public bool notcaptured() {
+        return agent.isActiveAndEnabled;
+    }
+
     public TakingDamage damnagedState;
     public Damager damager;
     public AttackPlayer attack;
@@ -19,7 +24,7 @@ public class Enemy : MonoBehaviour {
  
 
     public void Update() {
-        if (agent.enabled) {
+        if (agent.enabled && Vector3.Distance(Controller.INstance.transform.position, transform.position) < 20) {
             agent.updateRotation = false;
             agent.SetDestination(Controller.INstance.transform.position);
         }
@@ -29,27 +34,23 @@ public class Enemy : MonoBehaviour {
     }
 
     public void ParentToSpinnyThing(SpinnyThing thing) {
-        agent.isStopped = true;
-        agent.enabled = false;
-        this.enabled = false;
-        transform.SetParent(thing.transform, true);
-        transform.position += Vector3.up * height;
-        thing.speed = spinnythingspeed;
-        this.gameObject.layer = Extensions.ToLayer(capturedLayer.value);
-        damager.enabled = true;
-        attack.enabled = false;
+        if (life > 0 && agent.isActiveAndEnabled) {
+            agent.isStopped = true;
+            agent.enabled = false;
+            this.enabled = false;
+            transform.SetParent(thing.transform, true);
+            transform.position += Vector3.up * height;
+            thing.speed = spinnythingspeed;
+            this.gameObject.layer = Extensions.ToLayer(capturedLayer.value);
+            damager.enabled = true;
+            attack.enabled = false;
+        }
     }
 
     public void TakeDamage(int hits, Vector3 awayFromWeapon) {
         this.life -= hits;
-        if (this.life <= 0) {
-            Projectile projectile = this.GetComponent<Projectile>();
-            projectile.Launch(13, awayFromWeapon);
-            this.gameObject.layer = Extensions.ToLayer(flyinglayer.value);
-        } else {
-            damnagedState.direction = awayFromWeapon;
-            damnagedState.GotoState();
-        }
+        damnagedState.direction = awayFromWeapon;
+        damnagedState.GotoState();
     }
 
     public void OnDrawGizmos() {

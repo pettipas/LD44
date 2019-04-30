@@ -15,6 +15,11 @@ public class SpinnyThing : MonoBehaviour
 
 
     void Update() {
+
+        if (captured != null && captured.notcaptured()) {
+            captured = null;
+        }
+
         ApplyDelta(Time.deltaTime);
     }
 

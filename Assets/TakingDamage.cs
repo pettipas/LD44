@@ -33,7 +33,6 @@ public class TakingDamage : MonoState
         ctrller.Move(direction * 3.0f * Time.smoothDeltaTime);
         if (timehit > duration ) {
             transform.position = new Vector3(transform.position.x,0, transform.position.z);
-            this.enabled = false;
             gameObject.layer = Extensions.ToLayer(enemyState);
             agent.enabled = true;
             agent.isStopped = false;
@@ -42,6 +41,7 @@ public class TakingDamage : MonoState
                 Destroy(this.gameObject);
                 explode.Duplicate(transform.position);
             }
+            this.enabled = false;
         }
     }
 }

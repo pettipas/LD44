@@ -38,7 +38,7 @@ public class Menu : MonoBehaviour
 
         ani.SafePlay("look");
         yield return new WaitForSeconds(1.0f);
-        SceneManager.LoadScene("main");
+        SceneManager.LoadScene("level1");
         yield break;
     }
 }

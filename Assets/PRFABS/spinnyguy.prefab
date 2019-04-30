@@ -4969,7 +4969,7 @@ MonoBehaviour:
   LastGoodDirection: {x: 0, y: 0, z: 0}
   LatestDirection: {x: 0, y: 0, z: 0}
   targeter: {fileID: 0}
-  Speed: 6
+  Speed: 3.5
   wheelsTransforms:
   - {fileID: 7230538244253121067}
   - {fileID: 7230538244390022145}
@@ -5027,7 +5027,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0.5
-  m_Radius: 0.5
+  m_Radius: 0.87
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -5154,7 +5154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7230538243213834463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7230538244428292091}
@@ -6030,7 +6030,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7230538244374396014}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.93999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7230538243858454184}
